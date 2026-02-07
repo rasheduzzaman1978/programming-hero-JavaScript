@@ -115,6 +115,8 @@ function analyzeMarks(marksObj) {
   let total = 0;
   let highest = "";
   let lowest = "";
+//   let highest = {};
+//   let lowest = {};
   let highestMark = -Infinity;
   let lowestMark = Infinity;
 
@@ -124,12 +126,19 @@ function analyzeMarks(marksObj) {
 
     if (mark > highestMark) {
       highestMark = mark;
-      highest = subject;
+    //   highest = subject;
+        highest = `${subject}: ${mark}`;
+        // highest = { subject: subject, mark: mark };
+        // or 
+        // highest = { subject, mark };
     }
 
     if (mark < lowestMark) {
       lowestMark = mark;
-      lowest = subject;
+    //   lowest = subject;
+    lowest = `${subject}: ${mark}`;
+    // lowest = { subject: subject, mark: mark };
+        // lowest = { subject, mark };
     }
   }
 
@@ -155,8 +164,45 @@ console.log(analyzeMarks({
 {
   total: 286,
   average: 71.5,
+  highest: 'physics: 88',
+  lowest: 'bangla: 55'
+}
+//   Or 
+{
+  total: 240,
+  average: 80,
+  highest: { subject: 'ict', mark: 90 },
+  lowest: { subject: 'chemistry', mark: 70 }
+}
+  */
+// ✅ Test Case 2
+console.log(analyzeMarks({
+  ict: 90,
+  biology: 80,
+  chemistry: 70
+}));
+
+/* Output:
+
+{
+  total: 286,
+  average: 71.5,
   highest: "physics",
   lowest: "bangla"
+}
+
+// Or 
+{
+  total: 286,
+  average: 71.5,
+  highest: { subject: 'physics', mark: 88 },
+  lowest: { subject: 'bangla', mark: 55 }
+}
+{
+  total: 240,
+  average: 80,
+  highest: { subject: 'ict', mark: 90 },
+  lowest: { subject: 'chemistry', mark: 70 }
 }
   */
 // ✅ Test Case 2
@@ -171,8 +217,8 @@ console.log(analyzeMarks({
 {
   total: 240,
   average: 80,
-  highest: "ict",
-  lowest: "chemistry"
+  highest: { subject: 'ict', mark: 90 },
+  lowest: { subject: 'chemistry', mark: 70 }
 }
 🔎 সহজভাবে বুঝো
 total → সব marks যোগ
@@ -326,6 +372,138 @@ Output: { valid: true, reasons: [] }
  */
 
 // ✅ 🟢 Beginner Level (একদম সহজ)
+// Problem 3: Password Strength Checker
+// Function name: checkPassword(password)
+// Rules:
+// Length must be at least 8
+// Must contain at least 1 number
+// Must contain at least 1 uppercase letter
+// Must not contain spaces
+// Test case 1
+// Input:  "helloWorld"
+// Output:
+// { valid: false, reasons: ["missing number"] }
+// Test case 2
+// Input:  "Hello123"
+// Output: { valid: true, reasons: [] }
+
+
+function checkPassword(password) {
+  let reasons = [];
+
+  let length = password.length;
+
+  let hasUppercase = false;
+  let hasNumber = false;
+  let hasSpace = password.includes(" ");
+
+  for (let i = 0; i < length; i++) {
+    let character = password[i];
+    // console.log(character);
+    if (character >= "0" && character <= "9") {
+      hasNumber = true;
+    }
+    if (character >= "A" && character <= "Z") {
+      hasUppercase = true;
+    }
+  }
+
+  //   console.log(password, length, hasUppercase, hasNumber);
+
+  if (hasNumber == false) {
+    reasons.push("Missing number");
+  }
+
+  if (hasUppercase == false) {
+    reasons.push("Missing uppercase");
+  }
+
+  if (hasSpace == true) {
+    reasons.push("Space found!!!!!");
+  }
+
+  //   console.log(reasons);
+
+  let isValid;
+  if (reasons.length === 0) {
+    isValid = true;
+  } else {
+    isValid = false;
+  }
+
+  //   console.log(isValid);
+
+  return {
+    valid: isValid,
+    reasons,
+  };
+}
+
+let output = checkPassword("helloworld");
+
+console.log(output);
+let output2 = checkPassword("Hello123");
+console.log(output2);
+
+// Or
+function checkPassword(password) {
+  let reasons = [];
+
+  let length = password.length;
+
+  let hasUppercase = false;
+  let hasNumber = false;
+  let hasSpace = password.includes(" ");
+
+  for (let i = 0; i < length; i++) {
+    let character = password[i];
+    // console.log(character);
+    if (character >= "0" && character <= "9") {
+      hasNumber = true;
+    }
+    if (character >= "A" && character <= "Z") {
+      hasUppercase = true;
+    }
+  }
+
+  //   console.log(password, length, hasUppercase, hasNumber);
+
+  if (hasNumber == false) {
+    reasons.push("Missing number");
+  }
+
+  if (hasUppercase == false) {
+    reasons.push("Missing uppercase");
+  }
+
+  if (hasSpace == true) {
+    reasons.push("Space found!!!!!");
+  }
+
+  //   console.log(reasons);
+
+  let isValid;
+  if (reasons.length === 0) {
+    isValid = true;
+  } else {
+    isValid = false;
+  }
+
+  //   console.log(isValid);
+
+  return {
+    valid: isValid,
+    reasons,
+  };
+}
+
+let output = checkPassword("helloworld");
+
+console.log(output);
+let output2 = checkPassword("Hello123");
+console.log(output2);
+
+// Or 
 function checkPassword(password) {
   let reasons = [];
 

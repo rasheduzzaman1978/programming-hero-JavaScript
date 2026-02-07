@@ -30,3 +30,6 @@ function layeredDiscountedTotal (quantity){
         return total;
     }
 }
+
+const total = layeredDiscountedTotal (250);
+console.log("Total price is:", total);

@@ -1,21 +1,93 @@
-// Task -1: Find the lowest number in the array below.
+// Task -1: Find the lowest, highest, total, average, sorted (Ascending, Descending) number in the array below.
 // <br>
 // `const heights = [167, 190, 120, 165, 137];`
 // 🔰 1️⃣ Beginner Level (Manual Way – Loop ব্যবহার করে)
 
 // সবচেয়ে সহজ এবং বোঝার মতো পদ্ধতি:
+const heights = [62, 78, 54, 69, 62, 48, 54, 78, 60];
 
-const heights = [167, 190, 120, 165, 137];
+let lowest = heights[0];
+let highest = heights[0];
+let total = 0;
+const unique = [];
+// কোন সংখ্যা কতবার আছে তা বের করার জন্য
+const count = {};
 
-let lowest = heights[0];  // প্রথম মানটাকে ধরলাম lowest হিসেবে
+for (let i = 0; i < heights.length; i++) {
+  total = total + heights[i];
 
-for (let i = 1; i < heights.length; i++) {
-    if (heights[i] < lowest) {
-        lowest = heights[i];
-    }
+  if (heights[i] < lowest) {
+    lowest = heights[i];
+  }
+  if (heights[i] > highest) {
+    highest = heights[i];
+  }
+
+  // Repeater value বাদ দেয়ার জন্য 
+  if(!unique.includes(heights[i])){
+    unique.push(heights[i]);
+  }
+
+  // কোন সংখ্যা কতবার আছে
+  const num = heights[i];
+
+  // if(count[num]) {
+  //   count[num]++;
+  // } else {
+  //   count[num] = 1;
+  // }
+  // 📌 আরেকটু পরিষ্কারভাবে লেখা যায়
+if (count[num] !== undefined) {
+  count[num] = count[num] + 1;
+} else {
+  count[num] = 1;
 }
 
-console.log("Lowest number is:", lowest);
+// ⚡ সবচেয়ে স্মার্ট ভার্সন
+// count[num] = (count[num] || 0) + 1; // অথবা, নিচের কোড
+// এটা একই কাজ এক লাইনে করে।
+// এখানে || হচ্ছে OR অপারেটর।
+
+// 👉 নিয়ম:
+
+// যদি বাম পাশ truthy হয় → সেটাই নেবে
+
+// না হলে ডান পাশ নেবে
+// 🏆 Best Practice
+
+// Frequency count এর জন্য:
+
+count[num] = (count[num] ?? 0) + 1;
+
+// এটা সবচেয়ে সঠিক ও আধুনিক পদ্ধতি ✅
+// 🔥 2. Nullish Coalescing (??)
+// value ?? "default"
+// 👉 শুধু null বা undefined হলে "default" নেবে।
+
+}
+
+heights[2] = 70;
+heights.unshift(90);
+heights.shift();
+heights.push(56);
+heights.pop();
+
+const average = total / heights.length;
+const sortedHeights = [...heights].sort((a, b) => a - b);
+const sortedHeights2 = [...heights].sort((b, a) => b - a);
+
+console.log("Total:", total);
+console.log("Average:", average.toFixed(2));
+console.log("Lowest:", lowest);
+console.log('Highest:', highest);
+console.log('Original:', heights);
+console.log('Sorted (Ascending):', sortedHeights);
+console.log('Sorted (Descending):', sortedHeights2);
+console.log('unique:', unique);
+console.log('Count:', count);
+// console.log(heights[5]);
+// console.log(heights[0]);
+
 
 /*🔎 কীভাবে কাজ করছে?
 
@@ -81,22 +153,30 @@ const heights = [167, 190, 120, 165, 137];
 console.log(Math.min(...heights));
 
 
-// Task -2: Find the friend with the smallest name.
+// Task -2: Find the friend with the smallest and biggest name.
 // <br>
 // `const heights2 = ['rahim', 'robin', 'rafi', 'ron', 'rashed'];`
 
 
-const heights2 = ['rahim', 'robin', 'rafi', 'ron', 'rashed'];
 
-let smallest = heights2[0];
+const names = ['sajid', 'sifat', 'Nafisa', 'Jon', 'Alauddin'];
 
-for (let i = 1; i < heights2.length; i++) {
-    if (heights2[i].length < smallest.length) {
-        smallest = heights2[i];
-    }
+let smallest = names[0];
+let biggest = names[0];
+
+for (let i = 1; i < names.length; i++) {
+  if (names[i].length < smallest.length) {
+    smallest = names[i];
+  }
+
+  if (names[i].length > biggest.length) {
+    biggest = names[i];
+  }
+
 }
 
-console.log("Smallest name is:", smallest);
+console.log('Smallest name is:', smallest);
+console.log('Biggest name is:', biggest);
 
 /* 🔎 কীভাবে কাজ করছে?
 
@@ -237,32 +317,39 @@ function calculateElectronicsBudget(laptop, tablet, mobile) {
 
 // 🔥 More Advanced (Dynamic Version – Flexible System)
 function calculateElectronicsBudget(items) {
+  const prices = {
+    laptop: 35000,
+    tablet: 15000,
+    mobile: 20000,
+    watch: 5000
+  };
 
-    const prices = {
-        laptop: 35000,
-        tablet: 15000,
-        mobile: 20000
-    };
+  let total = 0;
 
-    let total = 0;
-
-    for (let item in items) {
-        if (prices[item]) {
-            total += items[item] * prices[item];
-        }
+  for (let item in items) {
+    if(item in prices) { 
+      total = total + items[item] * prices[item];
     }
-
-    return total;
+  }
+  return total;
 }
 
-// Example:
-console.log(
-    calculateElectronicsBudget({
-        laptop: 1,
-        tablet: 2,
-        mobile: 1
-    })
-);
+
+const totalCost = calculateElectronicsBudget({
+  laptop: 1,
+  tablet: 2,
+  mobile: 1,
+  watch: 1
+});
+
+console.log("Total Budget:", totalCost, "tk");
+
+// console.log(calculateElectronicsBudget({
+//   laptop: 1,
+//   tablet: 2,
+//   mobile: 1
+// })
+// );
 
 
 // 👉 এই ভার্সনে future এ নতুন product যোগ করলেও সহজে কাজ করবে।
@@ -270,8 +357,16 @@ console.log(
 /*
 Task-4: 
 
-You are `given an array of phone objects`, each containing information about the `model, brand, and price`. Your task is to write a JavaScript function named `findAveragePhonePrice` that takes this `array as input` and returns the `average price of phone`.
+(You are `given an array of phone objects`, each containing information about the `model, brand, and price`. Your task is to write a JavaScript function named `findAveragePhonePrice` that takes this `array as input` and returns the `average price of phone`.)
+"Given a list of phones where each phone has a model name, brand, and price, write a JavaScript function that calculates:
 
+The total price of all phones
+
+The average price
+
+The cheapest phone
+
+The most expensive phone"
 **Input**
 
 <br>
@@ -298,17 +393,29 @@ const phones = [
 
 function findAveragePhonePrice(phones) {
   let total = 0;
+  let cheapest = phones[0];
+  let expensive = phones[0];
 
-  for (let i = 0; i < phones.length; i++) {
+  for (let i =0; i < phones.length; i++) {
     total = total + phones[i].price;
-    console.log(total); // চাইলে রাখতে পারেন
+    // To get cheapest phone
+    if (phones[i].price < cheapest.price) {
+      cheapest = phones[i];
+    }
+    // To get expensive phone
+    if (phones[i].price > expensive.price) {
+      expensive = phones[i];
+    }
   }
-
+  console.log('Total Price:', total);
   const average = total / phones.length;
-  return average;
+  return {average, cheapest, expensive};
 }
 
-console.log(findAveragePhonePrice(phones));
+const result = findAveragePhonePrice(phones);
+console.log('Average price:', Math.round(result.average));
+console.log('Cheapest Phone:', result.cheapest);
+console.log('Expensive Phone:', result.expensive);
 
 /*🔎 কী হচ্ছে?
 
@@ -444,7 +551,7 @@ function calculateMonthlyTotalSalary(employees) {
     return totalYearly / 12;
 }
 
-console.log(calculateMonthlyTotalSalary(employees));
+console.log(Math.round(calculateMonthlyTotalSalary(employees)));
 
 // 🟡 Intermediate (for...of)
 function calculateMonthlyTotalSalary(employees) {

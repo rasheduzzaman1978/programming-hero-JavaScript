@@ -1,11 +1,13 @@
 // Task-1: Write a function to convert temperature from Celsius to Fahrenheit.
 
 function celsiusToFahrenheit(celsius) {
-  return (celsius * 9/5) + 32;
+  const fahrenheit = (celsius * 9/5) + 32;
+  // return (celsius * 9/5) + 32;
+  return fahrenheit;
 
 }
 
-let celsius = 25;
+let celsius = 35;
 let fahrenheit = celsiusToFahrenheit(celsius);
 console.log(celsius + "°C = " + fahrenheit + "°F");
 
@@ -14,24 +16,35 @@ console.log(celsius + "°C = " + fahrenheit + "°F");
 
 function countOccurrences(arr, number) {
     let count = 0;
+    let count2 = {};
 
     for (let i = 0; i < arr.length; i++) {
+
         if (arr[i] === number) {
             count++;
         }
+
+        const num = arr[i];
+
+        if (count2[num] !== undefined) {
+            count2[num] = count2[num] + 1;
+        } else {
+            count2[num] = 1;
+        }
     }
 
-    return count;
+    return { count, count2 };
 }
 
-// উদাহরণ
-let numbers = [1, 2, 3, 2, 4, 2, 5];
+let numbers = [1, 2, 3, 2, 3, 4, 2, 5];
 let result = countOccurrences(numbers, 2);
 
-console.log("2 appears " + result + " times.");
+console.log("2 appears " + result.count + " times.");
+console.log("count2:", result.count2);
 
 // 📌 Output:
 // 2 appears 3 times.
+// count2: { '1': 1, '2': 3, '3': 2, '4': 1, '5': 1 }
 
 // // ✅ পদ্ধতি ২: filter() ব্যবহার করে (ছোট ও সহজ উপায়)
 // function countOccurrences(arr, number) {
@@ -68,8 +81,9 @@ function countVowels(str) {
 }
 
 // উদাহরণ
-let text = "Hello World";
+let text = "Ridwan Sajid";
 console.log("Number of vowels:", countVowels(text));
+
 
 // 📌 Output:
 // Number of vowels: 3
@@ -113,8 +127,8 @@ function findLongestWord(str) {
 
 // উদাহরণ
 let sentence = "I am learning Programming to become a programmer";
-console.log(findLongestWord(sentence));
-
+console.log('Longest word is :', findLongestWord(sentence));
+// Output: Longest word is : Programming
 /* 🔎 ব্যাখ্যা:
 
 split(" ") দিয়ে string কে শব্দ অনুযায়ী array বানানো হয়েছে

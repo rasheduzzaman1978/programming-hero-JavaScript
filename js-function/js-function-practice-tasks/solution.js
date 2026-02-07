@@ -1,4 +1,4 @@
-// Task-1:
+// Task-1: Take four parameters. Multiply the four numbers and then return the result 
 function multiply (a, b, c, d) {
   return a * b * c * d;
 }
@@ -6,7 +6,7 @@ function multiply (a, b, c, d) {
 const nums = multiply(4, 5, 2, 3);
 console.log(nums);
 
-// Task-2:
+// Task-2: Take a number if the number is odd multiply it by 2 and return the result. If the number is even divide it by two and return the result.
 
 function evenMultiplyDivide(numbers) {
      if(numbers % 2 === 0) {
@@ -22,7 +22,7 @@ function evenMultiplyDivide(numbers) {
 const numb = evenMultiplyDivide(9);
 console.log(numb);
 
-// Task-3:
+// Task-3: Write a function called make_avg() which will take an array of integers and the size of that array and return the average of those values.
 
 function make_avg1(arr) {
   let sum = 0;
@@ -31,6 +31,9 @@ function make_avg1(arr) {
     sum += num;
   }
   console.log(arr);
+  // const average = sum / arr.length;
+  // return average;
+  // উপরের দুই লাইনের পরিবর্তে নিচের লাইন লেখা যায়।
   return sum / arr.length;
 }
 
@@ -89,7 +92,7 @@ const numbers3 = [20, 30, 40, 60];
 const result3 = make_avg(numbers3);
 console.log('Average is:', result3);
 
-// Task-4:
+// Task-4: Write a function called count_zero() which will take a binary string (Binary string is a string which is consist of only 0 and 1) as parameter and count how many 0’s are there in that string.
 
 function count_zero(binaryString) {
   let count = 0;
@@ -112,8 +115,7 @@ function count_zero(binaryString) {
 const result5 = count_zero('10100001010010');
 console.log('Number of zeros:', result5);
 
-// Task-5:
-
+// Task-5: Write a function called odd_even() which takes an integer value and tells whether this value is even or odd. If even return `Even`. If odd return `Odd`
 
 function isEven(number) {
   if (number % 2 === 0) {

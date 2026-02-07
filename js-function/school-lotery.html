@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>স্কুল ভর্তি লটারি</title>
+
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    margin-top:40px;
+}
+
+/* Fullscreen Overlay */
+#overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transform:translateX(100%);
+    transition:transform 0.8s ease;
+    z-index:999;
+    text-align:center;
+}
+
+#overlay.show{
+    transform:translateX(0);
+}
+
+#overlayContent{
+    font-weight:900;
+}
+
+button{
+    padding:10px 20px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.number{
+    display:inline-block;
+    margin:5px;
+    padding:8px 12px;
+    border-radius:6px;
+    color:white;
+}
+
+.final{ background:green; }
+.waiting{ background:orange; }
+
+.box{
+    margin-top:20px;
+}
+</style>
+
+</head>
+<body>
+
+<h2>স্কুল ভর্তি লটারি</h2>
+<button onclick="drawNumber()">লটারি তুলুন</button>
+
+<h3 id="countBox">Count: 0</h3>
+
+<div class="box">
+    <h3>ফাইনাল তালিকা (২০ জন)</h3>
+    <div id="finalList"></div>
+</div>
+
+<div class="box">
+    <h3>অপেক্ষমান তালিকা (৫ জন)</h3>
+    <div id="waitingList"></div>
+</div>
+
+<div id="overlay">
+    <div id="overlayContent"></div>
+</div>
+
+<script>
+
+// ১–১০০ তৈরি
+let numbers = Array.from({length:100}, (_,i)=>i+1);
+
+// Fisher-Yates Shuffle (No duplicate possible)
+for(let i=numbers.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [numbers[i],numbers[j]]=[numbers[j],numbers[i]];
+}
+
+let currentIndex=0;
+const maxFinal=20;
+const maxWaiting=5;
+
+function showOverlay(text, options={}){
+
+    const overlay=document.getElementById("overlay");
+    const content=document.getElementById("overlayContent");
+
+    content.textContent=text;
+    content.style.fontSize = options.size || "300px";
+    content.style.color = options.color || "yellow";
+    overlay.style.background = options.bg || "black";
+
+    overlay.classList.add("show");
+
+    setTimeout(()=>{
+        overlay.classList.remove("show");
+    }, options.duration || 1500);
+}
+let phaseChanged = false;
+function drawNumber(){
+
+    if(currentIndex >= maxFinal + maxWaiting){
+        alert("লটারি সম্পন্ন হয়েছে!");
+        return;
+    }
+
+    // ✅ ২০ জন পূর্ণ হলে শুধু একবার phase change হবে
+    if(currentIndex === maxFinal && !phaseChanged){
+
+        phaseChanged = true; // 👈 একবারই চলবে
+
+        showOverlay("ফাইনাল তালিকা শেষ",{
+            size:"80px",
+            color:"white",
+            bg:"green",
+            duration:2000
+        });
+
+        setTimeout(()=>{
+            showOverlay("অপেক্ষমান তালিকা শুরু",{
+                size:"80px",
+                color:"white",
+                bg:"blue",
+                duration:2000
+            });
+        },2200);
+
+        return;
+    }
+
+    const number = numbers[currentIndex];
+
+    showOverlay(number,{
+        size:"300px",
+        color:"yellow",
+        bg:"black",
+        duration:1500
+    });
+
+    setTimeout(()=>{
+
+        const span=document.createElement("span");
+        span.className="number";
+
+        if(currentIndex < maxFinal){
+            span.classList.add("final");
+            document.getElementById("finalList").appendChild(span);
+        }else{
+            span.classList.add("waiting");
+            document.getElementById("waitingList").appendChild(span);
+        }
+
+        span.textContent=number;
+
+        currentIndex++;
+        document.getElementById("countBox").textContent="Count: "+currentIndex;
+
+    },1500);
+}
+
+
+</script>
+
+</body>
+</html>
