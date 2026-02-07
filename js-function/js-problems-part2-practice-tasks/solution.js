@@ -590,3 +590,55 @@ console.log(calculateMonthlyTotalSalary(employees));
 তারপর সব যোগ করতে হবে
 
 তারপর yearly থেকে monthly convert করতে হবে */
+
+const employees = [
+    { name: "shahin", experience: 5, starting: 20000, increment: 5000 },
+    { name: "shihab", experience: 3, starting: 15000, increment: 7000 },
+    { name: "shikot", experience: 9, starting: 30000, increment: 1000 },
+    { name: "shohel", experience: 0, starting: 29000, increment: 4000 },
+];
+function calculateMonthlyTotalSalary(employees) {
+    let totalYearly = 0;
+
+    for (let i = 0; i < employees.length; i++) {
+        const currentSalary = employees[i].starting + (employees[i].increment * employees [i].experience);
+
+        totalYearly += currentSalary;
+    }
+
+    return totalYearly / 12;
+}
+
+console.log(Math.round(calculateMonthlyTotalSalary(employees)));
+
+🔹 Reduce দিয়ে লেখা কোড
+const employees = [
+  { name: "shahin", experience: 5, starting: 20000, increment: 5000 },
+  { name: "shihab", experience: 3, starting: 15000, increment: 7000 },
+  { name: "shikot", experience: 9, starting: 30000, increment: 1000 },
+  { name: "shohel", experience: 0, starting: 29000, increment: 4000 },
+];
+
+function calculateMonthlyTotalSalary(employees) {
+  let totalYearly = employees.reduce((sum, emp) => {
+    let currentSalary = emp.starting + emp.increment * emp.experience;
+    return sum + currentSalary;
+  }, 0);
+
+  return totalYearly / 12;
+}
+
+console.log(Math.round(calculateMonthlyTotalSalary(employees)));
+
+🎯 Output
+29583
+
+✅ কীভাবে কাজ করছে
+
+reduce() দিয়ে sum (total yearly salary) বের করা হচ্ছে।
+
+প্রতিটি employee-এর salary = starting + increment * experience
+
+সব employee-এর salary যোগ করা হচ্ছে।
+
+শেষে / 12 দিয়ে মাসিক total salary বের করা হচ্ছে।

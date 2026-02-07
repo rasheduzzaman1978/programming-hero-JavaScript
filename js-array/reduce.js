@@ -821,3 +821,56 @@ console.log(result);
 
 ✅ এইভাবে আমরা একবারে সব গুরুত্বপূর্ণ তথ্য বের করতে পারি।
 reduce() সত্যিই খুব শক্তিশালী যখন একাধিক aggregation করতে হয়।
+
+function analyzeMarks(marksObj) {
+  let subjects = Object.keys(marksObj); // ['math','english','physics','bangla','biology']
+
+  let result = subjects.reduce((acc, subject) => {
+    let mark = marksObj[subject];
+
+    // total যোগ করা
+    acc.total += mark;
+
+    // highest mark
+    if (mark > acc.highestMark) {
+      acc.highestMark = mark;
+      acc.highestSubject = subject;
+    }
+
+    // lowest mark
+    if (mark < acc.lowestMark) {
+      acc.lowestMark = mark;
+      acc.lowestSubject = subject;
+    }
+
+    return acc;
+  }, {
+    total: 0,
+    highestMark: -Infinity,
+    lowestMark: Infinity,
+    highestSubject: null,
+    lowestSubject: null
+  });
+
+  // average যোগ করা
+  result.average = result.total / subjects.length;
+
+  // শুধু প্রয়োজনীয় properties return করা
+  return {
+    total: result.total,
+    average: result.average,
+    highestSubject: result.highestSubject,
+    lowestSubject: result.lowestSubject
+  };
+}
+
+// Test
+let output = analyzeMarks({
+  math: 78,
+  english: 65,
+  physics: 88,
+  bangla: 55,
+  biology: 99,
+});
+
+console.log(output);

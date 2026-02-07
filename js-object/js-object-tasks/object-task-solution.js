@@ -56,7 +56,7 @@ console.log(`number of properties:`, count);
 
 let myObject = {
     name: 'Ridwan Sajid',
-    age: 25,
+    age: 18,
     city: 'Sirajgonj',
     isStudent: true
 };
