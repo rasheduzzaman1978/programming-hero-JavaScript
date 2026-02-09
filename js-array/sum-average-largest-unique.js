@@ -1,19 +1,4 @@
-function reverseString(str){
-  return str.split(' ').reverse().join(' ');
-}
-
-console.log(reverseString('hello world'));
-
-function isLeapYear(year){
-  if((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-    return 'Lear Year';
-  } else {
-    return 'Not leap year';
-  }
-}
-
-console.log(isLeapYear(2025));
-
+// Array থেকে সংখ্যাগুলোর যোগ, গড়, বৃহত্তম ও ইউনিক সংখ্যা বের করার ফাংশন
 function analyzeArray(arr){
   let largest = arr[0];
   let sum = 0;
@@ -43,4 +28,3 @@ function analyzeArray(arr){
 
 console.log('Array- 1:', analyzeArray([10, 85, 45, 18, 68]));
 console.log('Array- 2:', analyzeArray([10, 85, 45, 85, 10, 85, 18, 68]));
-

@@ -820,6 +820,96 @@ Output:
 
 true
 
+✅ String থেকে Space বাদ দিয়ে Character Count
+let sentence = 'I love programming';
+
+// space বাদ দেওয়া
+let withoutSpace = sentence.replaceAll(' ', '');
+
+// মোট অক্ষর
+let charCount = withoutSpace.length;
+
+console.log(charCount);
+
+
+🔍 ব্যাখ্যা:
+
+replaceAll(' ', '') → সব space মুছে দেয়
+
+.length → মোট অক্ষরের সংখ্যা
+
+✅ কয়টি শব্দ আছে (Word Count)
+let sentence = 'I love programming';
+
+// space দিয়ে ভাগ
+let words = sentence.split(' ');
+
+let wordCount = words.length;
+
+console.log(wordCount);
+
+
+📌 Output হবে:
+
+3
+
+⚡ Extra Safe Version (multiple space থাকলে)
+let sentence = 'I   love   programming';
+
+// trim + regex
+let words = sentence.trim().split(/\s+/);
+
+console.log(words.length);
+
+--------------------------------------
+✅ যদি Array হয় তাহলে?
+
+ধরি—
+
+let arr = ['I', 'love', 'programming'];
+
+🔵 Word Count (array হলে)
+console.log(arr.length);
+
+🔵 Total Character Count (space ছাড়া)
+let totalChars = 0;
+
+for (let word of arr) {
+  totalChars += word.length;
+}
+
+console.log(totalChars);
+
+🚀 Function আকারে করলে (Reusable)
+▶ String Version
+function analyzeSentence(str) {
+  let charCount = str.replaceAll(' ', '').length;
+  let wordCount = str.trim().split(/\s+/).length;
+
+  return {
+    characters: charCount,
+    words: wordCount
+  };
+}
+
+console.log(analyzeSentence(sentence));
+
+▶ Array Version
+function analyzeArray(arr) {
+  let charCount = 0;
+
+  for (let word of arr) {
+    charCount += word.length;
+  }
+
+  return {
+    characters: charCount,
+    words: arr.length
+  };
+}
+
+console.log(analyzeArray(arr));
+
 40️⃣ Sentence থেকে সব word আলাদা করা
 ✅ (ক) সাধারণভাবে
 let sentence = "I love JavaScript";
@@ -1393,6 +1483,26 @@ Output:
 
 ব্যাখ্যা:
 প্রথমে সব সংখ্যার যোগফল বের করা হয়েছে, তারপর মোট সংখ্যার উপর ভাগ করা হয়েছে।
+
+function sumArray (arr){
+  let largest = 0;
+  let sum = 0;
+
+  for(let num of arr) {
+    sum +=num;
+   
+    if (num > largest) {
+    largest = num;
+  }
+  }
+   let average = sum / arr.length;
+  return {sum, largest, average};
+}
+const array = sumArray([10, 20, 30, 40]);
+console.log(array.sum);
+console.log(array.largest);
+console.log(array.largest);
+console.log(array.average);
 
 57️⃣ Array থেকে শুধু Unique Value রাখা
 function getUniqueValues(arr) {

@@ -21,6 +21,15 @@ const student = {
     
 }
 
+
+// 🔵 5️⃣ Merge Object
+const extraInfo = {
+  bloodGroup: 'O+',
+  hobby: 'Reading'
+};
+
+const mergedStudent = {...student, ...extraInfo};
+console.log(mergedStudent);
 console.log(student);
 console.log('Name:', student.name + ', ' + 'Class:',student.class + ', '+ 'Roll:', student.roll + ', ' + "Father's Name:", student.fathersName);
 console.log(student.address.village);
@@ -83,6 +92,13 @@ console.log(village);
 console.log(upazila);
 console.log(district);
 console.log(country);
+console.log('mobile' in student);
+console.log(student.hasOwnProperty('name'));
+console.log(student.friends.includes('Golap'));
+
+// ✅ ✔️ friend খোঁজা
+const found = student.friends.find(f => f === 'Talha');
+console.log(found);
 
 // 🔹 Nested Destructuring
 // 
