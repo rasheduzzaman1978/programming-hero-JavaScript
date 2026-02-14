@@ -1545,6 +1545,44 @@ Dhaka
 ব্যাখ্যা:
 student.address.city দিয়ে nested object এর ভিতরের property access করা হয়েছে।
 
+// Object 
+
+let student = {
+  name: 'Sifat Abdullah',
+  studentClass: 6,
+  roll: 92,
+  schoolInfo: {
+    name: 'Momena Ali Biggan School',
+    schooladderss: 'Ullapara, Sirajgonj'},
+  age: 13,
+  fatherName: 'Md. Rasheduzzaman',
+  motherName: 'Bilkis Khatun',
+  address: {
+    village: 'Kamalpur',
+    'postOffice': 'Goyhatta',
+    upazila: 'Ullapara',
+    district: 'Sirajgonj'
+
+  },
+  friends: ['Abu Talha', 'Golap', 'Siam']
+};
+
+let {name, roll, studentClass, age, fatherName, motherName} = student;
+let { schoolInfo: { name: schoolName, schooladderss } } = student;
+let { address: { village, postOffice, upazila, district}} = student;
+console.log('Name:', name);
+console.log('Class:', studentClass);
+console.log('Roll:', roll);
+console.log('Age:', age);
+console.log("Father's Name:", fatherName);
+console.log("Mother's Name:", motherName);
+console.log('School Name:', schoolName);
+console.log('School Address:', schooladderss);
+console.log('Village:', village);
+console.log('Post Office:', postOffice);
+console.log('Upazila:', upazila);
+console.log('District:', district);
+
 59️⃣ Function এর ভিতরে Function ব্যবহার (Nested Function)
 function outerFunction(a, b) {
 

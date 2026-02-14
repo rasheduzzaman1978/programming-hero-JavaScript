@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour of DOM</title>
+  <style>
+    h1 {
+      color: gold;
+    }
+
+    #food-title {
+      /* color: green; */
+    }
+
+    .foods .foreign {
+      /* font-weight: 900; */
+    }
+
+    .bg-red {
+      background-color: red;
+    }
+
+    .big {
+      font-size: 4em;
+    }
+
+    .small {
+      font-size: 1em;
+    }
+
+    
+  </style>
+  <link rel="stylesheet" href="./styles/stlyle.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>This is my header no banner</h1>
+    </header>
+    <section id="student-person" class="person">
+    <h1>Welcome to my DOM</h1>
+    <ul>
+      <li>Sajid</li>
+      <li>Sifat</li>
+      <li>Fahim</li>
+      <li>Fahad</li>
+      <li class="international">Mohammad Salman</li>
+    </ul>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint veniam corrupti, odio placeat <span>This is span text.</span>ipsum aspernatur, reprehenderit nostrum quod iste porro alias odit at rem fugit natus aliquam, <span>Another span text.</span> saepe?</p>
+  </section>
+
+  <section class="foods">
+    <h1 id="food-title">My loving food</h1>
+    <ul>
+      <li>Rice</li>
+      <li class="foreign">Potato</li>
+      <li id="all-time">Bread</li>
+      <li>Fish</li>
+      <li>Meat</li>
+      <li>Chicken</li>
+      <li class="foreign">Pasta</li>
+      <li class="foreign">Burger</li>
+      <li class="foreign">Pizza</li>
+    </ul>
+  </section>
+  </main>
+
+  <script>
+    // console.log('Hello from JavaScript');
+    const student = {
+      name: 'Ridwan Sajid',
+      id: 101,
+      study: function (subject) {
+        // console.log('Studing subject:', subject);
+      }
+    }
+
+    const liCollection = document.getElementsByTagName('li');
+    // console.log(liCollection);
+    for (const li of liCollection){
+      // console.log(li);
+      // console.log(li.innerText);
+    }
+
+    const allHeading = document.getElementsByTagName('h1');
+    for (const heading of allHeading) {
+      // console.log(heading);
+      // console.log(heading.innerText);
+    }
+
+    const spanText = document.getElementsByTagName('span');
+    // console.log(spanText);
+    for (const span of spanText)  {
+      // console.log(span);
+      // console.log(span.innerText);
+    }
+
+    const foodTitleH1 = document.getElementById('food-title');
+    // console.log(foodTitleH1);
+    // console.log(foodTitleH1.innerText);
+    // foodTitleH1.innerText = 'Foods I love';
+    // foodTitleH1.style.fontSize = '50px';
+    // foodTitleH1.style.backgroundColor = 'lightblue';
+    foodTitleH1.style.padding = '10px';
+    foodTitleH1.style.margin = '10px';
+    foodTitleH1.style.borderRadius = '10px';
+    
+
+
+
+    
+    const allTimeElement = document.getElementById('all-time');
+    // console.log(allTimeElement);
+    // console.log(allTimeElement.innerText);
+    allTimeElement.innerText = 'Square Brand Bread';
+
+    const foreignElements = document.getElementsByClassName('foreign');
+    // console.log(foreignElements);
+
+    for (element of foreignElements) {
+      // console.log(element);
+      // console.log(element.innerText);
+    }
+
+    // document.getElementsByClassName('foods')[0].style.color = 'red';
+
+    document.querySelector('.foods').style.color = 'blue';
+
+    document.querySelector('#food-title').style.color = 'purple';
+
+    const foodsSection = document.getElementsByClassName('foods');
+    for (const food of foodsSection) {
+      // food.style.color = 'purple';
+      food.style.backgroundColor = 'gray';
+      food.style.padding = '8px';     
+    }
+
+    const ul = document.querySelector('.foods ul');
+    // ul.style.listStyleType = 'none';
+    
+    document.querySelector('.foods ul').style.listStyleType = 'square';
+
+    const items = document.querySelectorAll('.foods li');
+    for (let item of items) {
+      item.style.listStyleType = 'none';
+    }
+    
+    const spanElements = document.querySelectorAll('#student-person p span');
+    // console.log (spanElements);
+    for (let span of spanElements){
+      // console.log(span);
+      // console.log(span.innerText);
+    }
+
+    const span =document.querySelector('#student-person span');
+    // console.log(span);
+
+    // 🧪 Practical Demo: HTMLCollection vs NodeList
+    // ✅ Step 1: এই JavaScript কোড যোগ করো
+
+    // ১️⃣ HTMLCollection (Live)
+    const liveCollection = document.getElementsByTagName('li');
+    // ২️⃣ NodeList (Static)
+    const staticNodeList = document.querySelectorAll('li');
+
+    // console.log('Before adding new li:');
+    // console.log('HTMLCollection length:', liveCollection.length);
+    // console.log('NodeList Length:', staticNodeList.length);
+
+    // ৩️⃣ নতুন li তৈরি
+    const newLi = document.createElement('li');
+    newLi.innerText = 'New Student';
+
+    // ul এ append করলাম
+    document.querySelector('#student-person ul').appendChild(newLi);
+
+    // console.log('After adding new li:');
+    // console.log('HTMLCollection length:', liveCollection.length);
+    // console.log('NodeList Length:', staticNodeList.length);
+  </script>
+  <!-- <script src="./hello.js"></script> -->
+</body>
+</html>
