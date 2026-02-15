@@ -29,18 +29,27 @@
       font-size: 1em;
     }
 
+    .section-card {
+      background-color: aquamarine;
+      margin-bottom: 10px;
+      border-radius: 15px;
+      margin: 15px;
+      padding: 10px;
+      border: 3px solid salmon;
+    }
+
     
   </style>
   <link rel="stylesheet" href="./styles/stlyle.css">
 </head>
 <body>
-  <main>
+  <main id="main-container">
     <header>
       <h1>This is my header no banner</h1>
     </header>
     <section id="student-person" class="person">
     <h1>Welcome to my DOM</h1>
-    <ul>
+    <ul id="student-list">
       <li>Sajid</li>
       <li>Sifat</li>
       <li>Fahim</li>
@@ -62,6 +71,16 @@
       <li class="foreign">Pasta</li>
       <li class="foreign">Burger</li>
       <li class="foreign">Pizza</li>
+    </ul>
+  </section>
+
+  <section id="fruits">
+    <h1>My favorite fruits</h1>
+    <ul>
+      <li>Mango</li>
+      <li>JackFruit</li>
+      <li>Lichi</li>
+      <li>Grape</li>
     </ul>
   </section>
   </main>
@@ -106,8 +125,22 @@
     foodTitleH1.style.margin = '10px';
     foodTitleH1.style.borderRadius = '10px';
     
+    // const sections = document.getElementsByTagName('section');
+    // console.log(sections);
+    const sections = document.querySelectorAll('section');
+    // console.log(sections);
+    // for (const section of sections) {
+    //   // console.log(section);
+    //   section.style.backgroundColor = 'lightblue';
+    //   section.style.border = '2px solid green';
+    //   section.style.margin = '15px';
+    //   section.style.padding = '15px';
+    //   section.style.borderRadius = '15px';
+    // }
 
-
+    for (const section of sections) {
+      section.classList.add('section-card');
+    }
 
     
     const allTimeElement = document.getElementById('all-time');
@@ -132,7 +165,7 @@
     const foodsSection = document.getElementsByClassName('foods');
     for (const food of foodsSection) {
       // food.style.color = 'purple';
-      food.style.backgroundColor = 'gray';
+      // food.style.backgroundColor = 'gray';
       food.style.padding = '8px';     
     }
 
@@ -180,5 +213,7 @@
     // console.log('NodeList Length:', staticNodeList.length);
   </script>
   <!-- <script src="./hello.js"></script> -->
+   <script src="./child.js"></script>
+   <script src="./append.js"></script>
 </body>
 </html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Events</title>
+</head>
+<body>
+  <div class="box" style="width: 100px; height: 100px; background-color: brown;">Box-1</div>
+  <h1>Dom Events</h1>
+  <!-- Option 1 for event handler -->
+  <button>Click Me</button>
+  <button onclick="console.log(63)">Another button</button>
+  <button onclick="console.log('I am clicked')">Third Button</button>
+  <input type="text" name="" id="">
+
+  <br>
+  <!-- Option 2 for click event handler -->
+   <button onclick="makeYellow()">Make Yellow</button>
+   <button onclick="makeRed()">Make Red</button>
+   <button onclick="makeGreen()">Make Green</button>
+   <br>
+   <!-- Option 3: get element by id and then set onclick to a function-->
+   <button id="btn-make-blue">Make Blue</button>
+   <button id="btn-make-purple">Make Purple</button>
+  <br>
+
+  <!-- Option 4: addEventListener -->
+   <button id="btn-make-aqua">Make Aqua</button>
+   <button id="btn-make-goldenrod">Make Goldenrod</button>
+  
+
+   <script>
+    function makeYellow() {
+      document.body.style.backgroundColor = 'yellow';
+    }
+    function makeRed() {
+      document.body.style.backgroundColor = 'red';
+    }
+    function makeGreen() {
+      document.body.style.backgroundColor = 'green';
+    }
+
+    // Option 3: get Element by Id and then set onclick 
+    const btnMakeBlue = document.getElementById('btn-make-blue');
+    btnMakeBlue.onclick = function makeBlue() {
+      document.body.style.backgroundColor = 'blue';
+    }
+
+    // Option 3: different version 
+    const btnMakePurple = document.getElementById('btn-make-purple');
+    btnMakePurple.onclick = makePurple;
+
+     function makePurple() {
+        document.body.style.backgroundColor = 'purple';
+    }
+
+    // option 4: use addEventListener
+    // button id="btn-make-aqua">Make Aqua</button>
+    // document.getElementById().addEventListener('event type', handler)
+
+    // document.getElementById('btn-make-aqua').addEventListener('click', function makeAqua() {
+
+    // })
+
+    document.getElementById('btn-make-aqua').addEventListener('click', function makeAqua() {
+      document.body.style.backgroundColor = 'aqua';
+    })
+
+    document.getElementById('btn-make-goldenrod')
+      .addEventListener('click', function makeGoldenrod() {
+      document.body.style.backgroundColor = 'goldenrod';
+    })
+
+    // Mouse Event 
+    const box = document.querySelector('.box');
+
+    // Click event 
+    box.addEventListener('click', function () {
+      box.style.backgroundColor = 'yellow';
+
+      // Mouseout event 
+      box.addEventListener('mouseout', function() {
+        box.style.backgroundColor = 'white';
+      })
+    })
+
+    // Keyboard Event 
+    const input = document.querySelector('input');
+    // Keydown event 
+    input.addEventListener('keydown', function(event) {
+      console.log('Key pressed:', event.key);
+    });
+
+    // Keyup event 
+    input.addEventListener('keyup', function (event) {
+      console.log('Key released:', event.key);
+    });
+
+    // Event Object 
+    const button = document.querySelector('button');
+    button.addEventListener('click', function(event) {
+      console.log('Event type:', event.type);
+      // Click 
+      console.log('Target element:', event.target);
+
+    })
+   </script>
+  <script src="./events.js"></script>
+</body>
+</html>

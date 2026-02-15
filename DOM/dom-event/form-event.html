@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="./form-event.css">
+</head>
+<body>
+<form class="feedback-form">
+
+    <h2>📘 School Feedback Form</h2>
+
+    <fieldset>
+      <legend>Search Section</legend>
+
+      <label for="image">Search your Image:</label>
+      <div class="search-box">
+        <input type="search" id="image" name="image">
+        <button type="button">Search</button>
+      </div>
+
+      <a href="#">For more click here</a>
+    </fieldset>
+
+    <fieldset>
+      <legend>Student Information</legend>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name">
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date">
+    </fieldset>
+
+    <fieldset>
+      <legend>Comment</legend>
+      <textarea id="comment" name="comment" rows="4"
+        placeholder="Write your feedback..."></textarea>
+    </fieldset>
+
+    <button class="submit-btn" type="submit">Submit Feedback</button>
+
+  </form>
+
+  <script src="./form-event.js"></script>
+</body>
+</html>

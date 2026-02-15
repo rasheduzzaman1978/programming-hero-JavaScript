@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Summary</title>
+</head>
+<body>
+  
+  <!-- main>section.section-item*3>h1{section title - $}+ul>li*4{Item-$} -->
+
+  <main>
+    <section id="section-container" class="section-item">
+      <h1 id="first-title">section title - 1</h1>
+      <ul>
+        <li>Item-1</li>
+        <li>Item-2</li>
+        <li>Item-3</li>
+        <li>Item-4</li>
+      </ul>
+    </section>
+    <section class="section-item">
+      <h1>section title - 2</h1>
+      <ul>
+        <li>Item-1</li>
+        <li>Item-2</li>
+        <li>Item-3</li>
+        <li>Item-4</li>
+      </ul>
+    </section>
+    <section class="section-item">
+      <h1 id="third-title">section title - 3</h1>
+      <ul id="third-list">
+        <li>Item-1</li>
+        <li>Item-2</li>
+        <li>Item-3</li>
+        <li>Item-4</li>
+      </ul>
+    </section>
+  </main>
+
+  <br>
+  <p>Hello - 1</p>
+  <p>Hello - 2</p>
+  <p>Hello - 3</p>
+  <br>
+  <button onclick="changePText()">Change Text</button>
+  <br>
+  <p id="demo">Original Text</p>
+  <img id="image" src="./images/news-3.png" alt="Old Image">
+  <br>
+  <br>
+  
+  <button onclick="modify()">Change</button>
+  <br>
+  <br>
+
+  <script>
+    // কোনো section এর মধ্যে নতুন div তৈরি করতে 
+    const sectionContainer = document.querySelector('#section-container');
+
+    // Create a new element 
+    const newDiv = document.createElement('div');
+    newDiv.innerText = 'This is a new div.';
+
+    // Append to container 
+    sectionContainer.appendChild(newDiv);
+
+    // Third section এর h1 tag এর text change করার জন্য
+    const thirdTitle = document.getElementById('third-title');
+    thirdTitle.innerText = 'My third choice';
+    
+  </script>
+  <script src="./first.js"></script>
+  <script src="./second.js"></script>
+  <script src="./third.js"></script>
+  <script src="./fourth.js"></script>
+  <script src="./fifth.js"></script>
+
+
+</body>
+</html>
