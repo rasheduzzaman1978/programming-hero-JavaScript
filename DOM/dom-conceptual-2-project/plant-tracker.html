@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plant Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-50 min-h-screen p-6">
+
+  <div class="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-6">
+
+    <h1 class="text-3xl font-bold text-green-700 mb-6 text-center">
+      🌱 Smart Plant Tracker
+    </h1>
+
+    <!-- Input Section -->
+    <div class="flex gap-3 mb-4">
+      <input type="text" id="plantName"
+        placeholder="Plant name"
+        class="flex-1 border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-400">
+
+      <input type="number" id="waterInterval"
+        placeholder="Water every (days)"
+        class="w-40 border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-400">
+
+      <button id="addPlant"
+        class="bg-green-600 text-white px-4 rounded-lg hover:bg-green-700 transition">
+        Add
+      </button>
+    </div>
+
+    <!-- Filter -->
+    <div class="flex gap-3 mb-4">
+      <button onclick="filterPlants('all')" class="px-3 py-1 bg-gray-200 rounded">All</button>
+      <button onclick="filterPlants('watered')" class="px-3 py-1 bg-green-200 rounded">Watered</button>
+      <button onclick="filterPlants('not')" class="px-3 py-1 bg-red-200 rounded">Not Watered</button>
+    </div>
+
+    <!-- Progress -->
+    <div class="mb-4">
+      <div class="w-full bg-gray-200 rounded-full h-4">
+        <div id="progressBar" class="bg-green-500 h-4 rounded-full w-0"></div>
+      </div>
+      <p id="progressText" class="text-sm mt-1 text-gray-600"></p>
+    </div>
+
+    <!-- Plant List -->
+    <ul id="plantList" class="space-y-3"></ul>
+
+  </div>
+
+<script>
+const plantName = document.getElementById("plantName");
+const waterInterval = document.getElementById("waterInterval");
+const addPlant = document.getElementById("addPlant");
+const plantList = document.getElementById("plantList");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+
+let plants = JSON.parse(localStorage.getItem("plants")) || [];
+let currentFilter = "all";
+
+function savePlants() {
+  localStorage.setItem("plants", JSON.stringify(plants));
+}
+
+function renderPlants() {
+  plantList.innerHTML = "";
+
+  let filtered = plants.filter(p => {
+    if (currentFilter === "watered") return p.watered;
+    if (currentFilter === "not") return !p.watered;
+    return true;
+  });
+
+  filtered.forEach((plant, index) => {
+    const li = document.createElement("li");
+
+    li.className = "flex justify-between items-center p-3 bg-green-100 rounded-lg";
+
+    if (plant.watered) {
+      li.classList.add("opacity-50", "line-through");
+    }
+
+    li.innerHTML = `
+      <div>
+        <h3 class="font-semibold">${plant.name}</h3>
+        <p class="text-sm text-gray-600">
+          Water every ${plant.interval} days
+        </p>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="toggleWater(${index})"
+          class="bg-blue-500 text-white px-2 py-1 rounded text-sm">
+          ✔
+        </button>
+        <button onclick="deletePlant(${index})"
+          class="bg-red-500 text-white px-2 py-1 rounded text-sm">
+          ✖
+        </button>
+      </div>
+    `;
+
+    plantList.appendChild(li);
+  });
+
+  updateProgress();
+}
+
+function toggleWater(index) {
+  plants[index].watered = !plants[index].watered;
+  savePlants();
+  renderPlants();
+}
+
+function deletePlant(index) {
+  plants.splice(index, 1);
+  savePlants();
+  renderPlants();
+}
+
+function filterPlants(type) {
+  currentFilter = type;
+  renderPlants();
+}
+
+function updateProgress() {
+  const total = plants.length;
+  const watered = plants.filter(p => p.watered).length;
+  const percent = total === 0 ? 0 : (watered / total) * 100;
+
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Watered: ${watered} / ${total}`;
+}
+
+addPlant.addEventListener("click", () => {
+  if (plantName.value.trim() === "" || waterInterval.value === "") return;
+
+  plants.push({
+    name: plantName.value,
+    interval: parseInt(waterInterval.value),
+    watered: false
+  });
+
+  plantName.value = "";
+  waterInterval.value = "";
+  savePlants();
+  renderPlants();
+});
+
+renderPlants();
+</script>
+
+</body>
+</html>

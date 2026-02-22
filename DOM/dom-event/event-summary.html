@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Event Summary</title>
+</head>
+<body>
+    <h1>DOM Events Summary</h1>
+    <input id="name-input" type="text" placeholder="Your name">
+    <button onclick="addName()">Add name</button>
+    <button onclick="addName2()">Add Name2</button>
+    <div id="name-container">
+
+
+    </div>
+
+    <script>
+//       function addName() {
+//         const input = document.querySelector('input');
+//         const name = input.value;
+//         if (name) {
+//           const div = document.querySelector('div');
+//           const p = document.createElement('p');
+//           p.textContent = name;
+//           div.appendChild(p);
+//           input.value = '';
+//         }
+//       }
+
+//       // or 
+//       function addName() {
+//   const input = document.querySelector('input');
+//   const name = input.value.trim(); // extra space remove
+
+//   if (!name) return;
+
+//   const div = document.querySelector('div');
+//   const p = document.createElement('p');
+//   p.textContent = name;
+//   div.appendChild(p);
+
+//   input.value = '';
+// }
+
+// Programming Hero code 
+function addName() {
+  const nameInput = document.getElementById('name-input');
+  const newName = nameInput.value.trim();
+  // console.log(newName);
+  // Parent 
+  const nameContainer = document.getElementById('name-container');
+  // create p element
+  const p = document.createElement('p');
+  p.textContent = newName;
+  // append 
+  nameContainer.appendChild(p);
+  nameInput.value = '';
+}
+
+// add Event Listener 
+document.getElementById('addName2').addEventListener('click', function(event) {
+
+  addName2();
+  
+});
+    </script>
+</body>
+</html>
