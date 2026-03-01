@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrow Function</title>
+  <style>
+    h3 {
+      color: green;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+    
+<button id='btn'>Click me</button>
+<p id="output"></p>
+
+<br>
+<br>
+<input id="nameInput" type="text" placeholder="Enter your name" name="" id="">
+<button id="greetBtn">Greet</button>
+<h3 id="result"></h3>
+
+<script>
+  
+const button = document.getElementById('btn');
+const output = document.getElementById('output');
+
+button.addEventListener('click', () => {
+  output.textContent = 'Button Clicked';
+});
+
+
+const input = document.getElementById('nameInput');
+const greetBtn = document.getElementById('greetBtn');
+const result = document.getElementById('result');
+
+greetBtn.addEventListener('click', () => {
+  const name = input.value;
+  result.classList.add('h3');
+  result.textContent = "Hello, " + name + '!';
+})
+
+</script>
+</body>
+</html>

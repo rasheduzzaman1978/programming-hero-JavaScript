@@ -26,8 +26,21 @@ document.getElementById('btn-update-title')
 
       // set the name 
       const nameP = document.getElementById('name');
-      nameP.innerText ='Name: ' + name;
-        // input box খালি করার জন্য
-      nameInput.value = '';
+       // পুরো p tag এর রঙ পরিবর্তন করতে চাইলে
+        // nameP.style.color = 'red';
+        // শুধু নামের রঙ পরিবর্তন করতে চাইলে
+          nameP.innerHTML = 'Name: <span style="color:red;">' + name + '</span>';
+          // সাধারণভাবে দেখতে চাইলে
+        // nameP.innerText = 'Name: ' + name;
+          // input box খালি করার জন্য
+            nameInput.value = '';
+     
+    })
 
+    const makeBlue = document.getElementById('btn-make-blue').addEventListener('click', function() {
+      document.body.style.backgroundColor = 'blue';
+    })
+
+    const makeWhite = document.getElementById('btn-make-white').addEventListener('click', function(){
+      document.body.style.backgroundColor = 'white';
     })

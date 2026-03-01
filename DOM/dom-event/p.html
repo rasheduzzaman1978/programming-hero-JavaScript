@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Practice</title>
+  <style>
+    .comment {
+      color: black;
+      border: 2px solid aquamarine;
+      border-radius: 10px;
+      background-color: bisque;
+      padding: 15px;
+      margin: 10px;
+    }
+    .secret-text {
+      background-color: goldenrod;
+      font-size: 50px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="heading">DOM Practice</h1>
+  <button id="change-heading">Change Heading</button>
+  <br>
+  <p id="para">This class is very important for developers.</p>
+  <button id="styleBtn">Update Style</button>
+  <br>
+  
+  <p id="name">No Name</p>
+  <input id="nameInput" type="text" placeholder="Enter Your Name" name="" id="">
+  <button id="updateBtn">Update Name</button>
+  <br>
+  <br>
+  <button id="makeGreenBtn">Make Green</button>
+  <br>
+  <h2>My awesome comment box</h2>
+  <div id="comment-container">
+    <p class="comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quo autem beatae quasi dicta quam illum error, ratione at? Nisi!</p>
+    <p class="comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quo autem beatae quasi dicta quam illum error, ratione at? Nisi!</p>
+    <p class="comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quo autem beatae quasi dicta quam illum error, ratione at? Nisi!</p>
+      
+  </div>
+  <br>
+  <textarea id="comment-box" name="" id="" cols="30" rows="5"></textarea>
+    <br>
+    <button id="post-btn">Post Comment</button>
+  <br>
+ <h2 id="secret-info">My secret Info</h2>
+ <input id="input-delete" type="text" placeholder="write delete" name="" id="">
+ <button id="delete-btn" disabled>Delete</button>
+  
+<script>
+  document.getElementById('input-delete').addEventListener('keyup', function(event) {
+    const text = event.target.value;
+    const btnDelete = document.getElementById('delete-btn');
+    const secretTag = document.getElementById('secret-info');
+    if (text === 'delete') {
+      console.log('Delete typed');
+      btnDelete.removeAttribute('disabled');
+      secretTag.classList.add('secret-text');
+      // secretTag.style.display = 'none';
+    } else {
+      btnDelete.setAttribute('disabled', true);
+      secretTag.classList.remove('secret-text');
+    }
+  })
+</script>
+  <script src="./p.js"></script>
+</body>
+</html>
+
